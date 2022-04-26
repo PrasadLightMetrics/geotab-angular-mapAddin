@@ -1,0 +1,36 @@
+.table-wrap {
+    position: relative;
+    min-height: 150px;
+    display: block;
+  
+    .video-list-table {
+      min-width: 600px;
+    }
+  }
+  
+//   // tablet
+//   @media (min-width: 768px) and (max-width: 1279px) {
+//     .video-list-table,
+//     .mat-paginator {
+//       min-width: 1279px !important;
+//     }
+//   }
+  
+//   // mobile
+//   @media (min-width: 320px) and (max-width: 767px) {
+//     .video-list-table,
+//     .mat-paginator {
+//       min-width: 1279px !important;
+//     }
+//   }
+//   .mat-icon-button {
+//     line-height: 1 !important;
+//   }
+
+.btn-acc {
+    float: right;
+    z-index: 100;
+    position: relative;
+    border: 1px solid #dedede !important;
+    margin-left: 16px !important;
+}

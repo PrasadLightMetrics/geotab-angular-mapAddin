@@ -1,0 +1,137 @@
+<div
+  fxLayout="column"
+  fxLayoutGap="24px"
+  fxLayoutGap.xs="16px"
+  fxLayoutAlign="start stretch"
+  class="aggregate-violation"
+>
+  <mat-card fxLayout="column" fxLayoutGap="24px" fxLayoutGap.xs="16px">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayout.xs="column"
+      fxLayoutAlign.xs="start start"
+      fxLayoutGap="24px"
+    >
+      <h3 class="title card-title">Violation List</h3>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="end center"
+        fxLayout.xs="column"
+        fxLayoutAlign.xs="start start"
+        fxLayoutGap="24px"
+      >
+        <button
+          mat-icon-button
+          color="accent"
+          class="btn-acc"
+          matTooltip="Refresh"
+          [matTooltipPosition]="'left'"
+          type="button"
+        >
+          <!--*ngIf="!isMobile" 
+              [loading]="violationLoader"
+            (click)="getViolationsVideos(true)" -->
+          <mat-icon>refresh</mat-icon>
+        </button>
+
+        <!-- <mat-form-field class="select-box">
+            <mat-label>{{ 'tripsComponentSelectVideType' | translate }}</mat-label>
+            <mat-select [formControl]="violationType">
+              <ng-container *ngFor="let vioType of violationsTypeList">
+                <mat-option [value]="vioType?.value">{{ vioType?.label | translate }}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field> -->
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div class="table-wrap">
+        <table
+          mat-table
+          class="video-list-table"
+          matSortDisableClear
+          matSortDisableClear
+          #sort="matSort"
+          matSort
+          [dataSource]="viotableSource"
+        >
+          <!-- [matSortActive]="assetTableState?.sortKey" [matSortDirection]="assetTableState?.sortDirection"  -->
+          <ng-container matColumnDef="eventType">
+            <th mat-header-cell *matHeaderCellDef>Incident Type</th>
+            <td mat-cell *matCellDef="let event">
+              <div class="skeleton-line" style="max-width: 240px"></div>
+              <!--*ngIf="violationLoader"-->
+              <span>
+                <!--*ngIf="!violationLoader"-->
+                <!-- {{ event?.eventTypeLabel || 'N/A' | translate }} -->
+                {{ event?.eventTypeLabel || 'N/A' }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="eventTime">
+            <th mat-header-cell *matHeaderCellDef>Incident Time</th>
+            <td mat-cell *matCellDef="let event">
+              <!---->
+              <div class="skeleton-line" style="max-width: 240px"></div>
+              <span>{{ event?.eventTypeLabel || 'N/A' }}</span>
+            </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>{{ 'geotabViolationsActions' | translate }}</th>
+              <td mat-cell *matCellDef="let event; let i = index">
+                <div *ngIf="violationLoader" class="skeleton-line" style="max-width: 240px"></div>
+                <span *ngIf="!violationLoader">
+                  <button
+                    [disabled]="!event?.mediaUploaded"
+                    color="accent"
+                    matTooltip="{{ 'geotabViolationsPlayVideos' | translate }}"
+                    matTooltipPosition="left"
+                    mat-icon-button
+                    (click)="showMedia(event?.positionIndex)"
+                  >
+                    <mat-icon>play_circle_outline</mat-icon>
+                  </button>
+                  <button
+                    color="accent"
+                    mat-icon-button
+                    matTooltip="{{ 'geotabViolationsTripDetails' | translate }}"
+                    matTooltipPosition="left"
+                    (click)="navigateTo(event)"
+                  >
+                    <mat-icon>launch</mat-icon>
+                  </button>
+                </span>
+              </td>
+            </ng-container> -->
+
+          <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+        </table>
+
+        <!-- <div
+           
+            class="notification-container notification-info inside-table"
+            fxLayout="row"
+            fxLayoutGap="16px"
+            fxLayoutAlign="start center"
+          > -->
+        <!--  *ngIf="!violationLoader && !viotableSource?.data?.length" -->
+        <!-- <mat-icon class="notification-icon">info_outline</mat-icon>
+            <span>No videos Found</span>
+          </div> -->
+
+        <mat-paginator
+          class="paginator"
+          #paginator="matPaginator"
+          showFirstLastButtons
+        ></mat-paginator>
+        <!-- [length]="totalViolationCount"
+            [pageSize]="tablePageSize"
+            [pageIndex]="assetTableState?.pageIndex" -->
+      </div>
+    </div>
+  </mat-card>
+</div>
