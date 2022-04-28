@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -16,6 +17,7 @@ import {
   VIOLATION_VIDEOS_TABLE_COLUMNS,
 } from 'src/app/constants/constants';
 import { ViolationServiceService } from 'src/app/services/violationService/violation-service.service';
+import { IncidentModalComponent } from '../incident-modal/incident-modal.component';
 
 @Component({
   selector: 'app-violation-list',
@@ -41,10 +43,12 @@ export class ViolationListComponent implements OnInit, OnChanges {
   fleetId: any;
   startDate: any;
   endDate: any;
+  authToken: any;
 
   constructor(
     public route: ActivatedRoute,
-    private tripsService: ViolationServiceService
+    private tripsService: ViolationServiceService,
+    private dialog: MatDialog
   ) {}
 
   public getDateParams() {
@@ -85,15 +89,16 @@ export class ViolationListComponent implements OnInit, OnChanges {
     this.route.queryParams.subscribe((params: any) =>
       this.validateCode(params)
     );
-    
   }
 
   private validateCode(params: any) {
-    console.log("0", params)
-    const { fleetId, assetId } = params;
-    this.fleetId = fleetId;
-    this.currentAsset = assetId;
-    if(this.currentAsset && this.fleetId){
+    console.log('0', params);
+    const { fleetId, assetId, authToken } = params;
+    this.fleetId = 'lmfleet003';
+    this.currentAsset = 'G9ZMJZJD0D03';
+    this.authToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhbCI6eyJsb2dpbk5hbWUiOiJwcmFzYWQucmFqQGxpZ2h0bWV0cmljcy5jbyIsIm5hbWUiOiJQcmFzYWQgUmFqIiwiZmxlZXRzIjpbeyJmbGVldElkIjoibG1mbGVldDAwMyIsInBlcm1pc3Npb25zIjpbImFkbWluOmZsZWV0X2NvbmZpZyIsInJlYWQ6ZmxlZXRfY29uZmlnIiwidXBkYXRlOmZsZWV0X2NvbmZpZyJdfV0sImN1c3RvbWVyTmFtZSI6Imdlb3RhYiIsInVzZXJUeXBlIjoiZmxlZXRtYW5hZ2VyIiwidXNlck1ldGFkYXRhIjp7InRpbWV6b25lIjoiTG9jYWwiLCJtZXRyaWNVbml0IjoiTWlsZXMiLCJkYXRlRm9ybWF0IjoiTU0vREQvWVlZWSBISDptbTpzcyJ9fSwiaWF0IjoxNjUxMDUyMDAwLCJleHAiOjE2NTExMzg0MDB9.uWZy20csLvJ8mODalLteAnump__OIlaQXCjPqnmksGY';
+    if (this.currentAsset && this.fleetId) {
       this.getViolationsVideos();
     }
   }
@@ -102,11 +107,9 @@ export class ViolationListComponent implements OnInit, OnChanges {
     // this.dataService._currentAsset.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: string) => {
     //   this.currentAsset = value;
     // });
-    console.log("1")
     if (!this.currentAsset) {
       return;
     }
-    console.log("2")
     const { startDate, endDate } = this.getDateParams();
     // return new Promise<void>(() => {
     const pageIndex = 0;
@@ -135,7 +138,13 @@ export class ViolationListComponent implements OnInit, OnChanges {
       fleetId: this.fleetId,
     };
     this.tripsService
-      .getViolationsEvents(params, requestType, isRefresh, this.currentAsset)
+      .getViolationsEvents(
+        params,
+        requestType,
+        isRefresh,
+        this.currentAsset,
+        this.authToken
+      )
       .subscribe((res: any) => {
         console.log(res);
         this.violationList = res.rows;
@@ -165,5 +174,33 @@ export class ViolationListComponent implements OnInit, OnChanges {
           this.violationList = [];
         };
       });
+  }
+
+  public showMedia(positionIndex?: any) {
+    if (this.videoType === 'dvr') {
+      this.violationList = this.violationList.map((x: any, index: any) => {
+        return {
+          ...x,
+          isDvrEvent: true,
+          eventVideoFilename: x.response.link,
+          positionIndex: index,
+          videoDetails: {
+            videoResolution: x.videoResolution,
+          },
+          eventTypeLabel: x.timelaspeEnabled ? 'Time-lapse DVR' : 'DVR',
+        };
+      });
+    }
+    this.dialog.open(IncidentModalComponent, {
+      panelClass: ['incident-modal', 'mobile-modal'],
+      position: { top: '24px', bottom: '24px' },
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        allEvents: this.violationList,
+        currentIndex: positionIndex,
+        showCoachingTab: true,
+      },
+    });
   }
 }

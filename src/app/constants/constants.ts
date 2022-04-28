@@ -1,5 +1,7 @@
+import { Breakpoints } from '@angular/cdk/layout';
+
 export const VIDEO_LIST_TABLE_PAGE_SIZE = [5];
-export const  VIOLATION_VIDEOS_TABLE_COLUMNS = ['eventType', 'eventTime'];
+export const  VIOLATION_VIDEOS_TABLE_COLUMNS = ['eventType', 'eventTime', 'actions'];
 export const DVR_REQUEST_LIST_TABLE_COLUMNS = ['requestType', 'requestCreated', 'startTime', 'endTime', 'driverId', 'assetId', 'actions'];
 export const VIOLATION_PANIC_BUTTON_TABLE_COLUMNS = ['timestamp', 'driverName', 'actions'];
 export const PAGINATE_SIZES = 10;
@@ -73,7 +75,7 @@ export const VIOLATIONS_TYPE_LIST = [
       showDivider: true,
     },
   ];
-export  const TIME_LIMIT_IN_MS = 180 * 24 * 60 * 60 * 1000;
+export  const TIME_LIMIT_IN_MS = 30 * 24 * 60 * 60 * 1000;
 
 export const EVENTS_CONFIG: any = {
     'Traffic-Speed-Violated': {
@@ -166,3 +168,60 @@ export const EVENTS_CONFIG: any = {
     SMOKING: 'Smoking',
     OTHER: 'Other',
   };
+
+  export const EVENT_TAG_LIST = [
+    {
+      value: 'CELLPHONE',
+      text: 'Cellphone',
+    },
+    {
+      value: 'COLLISION',
+      text: 'Collision',
+    },
+    {
+      value: 'EATING_OR_DRINKING',
+      text: 'Drinking/Eating',
+    },
+    {
+      value: 'NO_SEATBELT',
+      text: 'No seatbelt',
+    },
+    {
+      value: 'SMOKING',
+      text: 'Smoking',
+    },
+    {
+      value: 'OTHER',
+      text: 'Other',
+    },
+  ];
+
+  export const BREAKPOINTS_XSMALL = [Breakpoints.XSmall];
+  export const BREAKPOINTS_SMALL = [Breakpoints.Small, Breakpoints.XSmall];
+  export const BREAKPOINTS_MEDIUM = [Breakpoints.Medium];
+  export const BREAKPOINTS_LARGE = [Breakpoints.Large, Breakpoints.XLarge];
+  export const BREAKPOINTS_LANDSCAPE = [Breakpoints.HandsetLandscape];
+
+  export const AUTO_TAGS_LIST: any = {
+    DROWSY_DRIVING: 'Drowsy',
+  };
+
+  export const MEDIA_SOURCES_ENUM: any = {
+    ROAD_FACING: 'Road facing',
+    DRIVER_FACING: 'Driver facing',
+    SIDE_BY_SIDE: 'Side-by-side',
+    PIP_ROAD_MAJOR: 'PiP Road major',
+    PIP_DRIVER_MAJOR: 'PiP Driver major',
+  };
+
+  export class GetEventListParams {
+    public tripId: string;
+    public driverId: string;
+    public includeViolations: boolean;
+  
+    constructor({ tripId = '', driverId = '', includeViolations = false }) {
+      this.tripId = tripId;
+      this.driverId = driverId;
+      this.includeViolations = includeViolations;
+    }
+  }

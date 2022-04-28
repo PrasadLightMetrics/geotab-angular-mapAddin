@@ -29,8 +29,8 @@
           [matTooltipPosition]="'left'"
           type="button"
         >
-          <!--*ngIf="!isMobile" 
-              [loading]="violationLoader"
+          <!-- [loading]="violationLoader" *ngIf="!isMobile" 
+              
             (click)="getViolationsVideos(true)" -->
           <mat-icon>refresh</mat-icon>
         </button>
@@ -60,12 +60,13 @@
           <ng-container matColumnDef="eventType">
             <th mat-header-cell *matHeaderCellDef>Incident Type</th>
             <td mat-cell *matCellDef="let event">
-              <div class="skeleton-line" style="max-width: 240px"></div>
-              <!--*ngIf="violationLoader"-->
-              <span>
-                <!--*ngIf="!violationLoader"-->
-                <!-- {{ event?.eventTypeLabel || 'N/A' | translate }} -->
-                {{ event?.eventTypeLabel || 'N/A' }}
+              <div
+                *ngIf="violationLoader"
+                class="skeleton-line"
+                style="max-width: 240px"
+              ></div>
+              <span *ngIf="!violationLoader">
+                {{ event?.eventTypeLabel || "N/A" }}
               </span>
             </td>
           </ng-container>
@@ -73,64 +74,74 @@
           <ng-container matColumnDef="eventTime">
             <th mat-header-cell *matHeaderCellDef>Incident Time</th>
             <td mat-cell *matCellDef="let event">
-              <!---->
-              <div class="skeleton-line" style="max-width: 240px"></div>
-              <span>{{ event?.eventTypeLabel || 'N/A' }}</span>
+              <div
+                *ngIf="violationLoader"
+                class="skeleton-line"
+                style="max-width: 240px"
+              ></div>
+              <span *ngIf="!violationLoader">{{
+                event?.timestampUTC || "N/A"
+              }}</span
+              ><!--| dateConversion: timezone:dateFormat:event?.timestamp-->
             </td>
           </ng-container>
 
-          <!-- <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>{{ 'geotabViolationsActions' | translate }}</th>
-              <td mat-cell *matCellDef="let event; let i = index">
-                <div *ngIf="violationLoader" class="skeleton-line" style="max-width: 240px"></div>
-                <span *ngIf="!violationLoader">
-                  <button
-                    [disabled]="!event?.mediaUploaded"
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let event; let i = index">
+              <div
+                *ngIf="violationLoader"
+                class="skeleton-line"
+                style="max-width: 240px"
+              ></div>
+              <span *ngIf="!violationLoader">
+                <button
+                  [disabled]="!event?.mediaUploaded"
+                  color="accent"
+                  matTooltip="Play Video"
+                  matTooltipPosition="left"
+                  mat-icon-button
+                  (click)="showMedia(event?.positionIndex)"
+                >
+                  <!---->
+                  <mat-icon>play_circle_outline</mat-icon>
+                </button>
+                <!-- <button
                     color="accent"
-                    matTooltip="{{ 'geotabViolationsPlayVideos' | translate }}"
-                    matTooltipPosition="left"
                     mat-icon-button
-                    (click)="showMedia(event?.positionIndex)"
-                  >
-                    <mat-icon>play_circle_outline</mat-icon>
-                  </button>
-                  <button
-                    color="accent"
-                    mat-icon-button
-                    matTooltip="{{ 'geotabViolationsTripDetails' | translate }}"
+                    matTooltip="Trip Details"
                     matTooltipPosition="left"
                     (click)="navigateTo(event)"
                   >
                     <mat-icon>launch</mat-icon>
-                  </button>
-                </span>
-              </td>
-            </ng-container> -->
+                  </button> -->
+              </span>
+            </td>
+          </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
         </table>
 
-        <!-- <div
-           
-            class="notification-container notification-info inside-table"
-            fxLayout="row"
-            fxLayoutGap="16px"
-            fxLayoutAlign="start center"
-          > -->
-        <!--  *ngIf="!violationLoader && !viotableSource?.data?.length" -->
-        <!-- <mat-icon class="notification-icon">info_outline</mat-icon>
-            <span>No videos Found</span>
-          </div> -->
+        <div
+          class="notification-container notification-info inside-table"
+          fxLayout="row"
+          fxLayoutGap="16px"
+          fxLayoutAlign="start center"
+          *ngIf="!violationLoader && !viotableSource?.data?.length"
+        >
+          <mat-icon class="notification-icon">info_outline</mat-icon>
+          <span>No videos Found</span>
+        </div>
 
         <mat-paginator
           class="paginator"
           #paginator="matPaginator"
           showFirstLastButtons
-        ></mat-paginator>
-        <!-- [length]="totalViolationCount"
-            [pageSize]="tablePageSize"
-            [pageIndex]="assetTableState?.pageIndex" -->
+          length=5000
+          [pageSize]="tablePageSize"
+          
+        ></mat-paginator><!--[pageIndex]="assetTableState?.pageIndex"-->
       </div>
     </div>
   </mat-card>

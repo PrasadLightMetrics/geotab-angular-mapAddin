@@ -1,0 +1,379 @@
+// @import './colors';
+// @import './fonts';
+
+.carousel-container {
+  display: block;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.custom-paginator {
+  position: absolute;
+  top: -8px;
+  right: 48px;
+}
+
+::ng-deep .mat-paginator-range-label {
+  margin: 0 16px !important;
+}
+
+::ng-deep {
+  .mat-slider-track-fill,
+  .mat-slider-wrapper,
+  .mat-slider-track-wrapper,
+  .mat-slider-track-background {
+    height: 4px !important;
+    border-radius: 24px;
+    // background-color: $light-grey-color;
+  }
+
+  .mat-slider:hover {
+    cursor: pointer;
+    .mat-slider-track-background {
+    //   background-color: $light-grey-color;
+    }
+  }
+}
+
+.modal-header {
+  margin-bottom: 8px !important;
+}
+
+.video-container {
+  position: relative;
+
+  .custom-btn {
+    position: absolute;
+    right: 16px;
+    bottom: 24px;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+
+    mat-icon {
+    //   color: $white-color;
+    }
+  }
+
+  &:hover .custom-btn {
+    visibility: visible;
+  }
+}
+
+.dual-video {
+  video {
+    object-fit: cover;
+    border-radius: 4px;
+    // background-color: $black-color;
+  }
+}
+
+.image-container {
+  max-height: 316px;
+  width: 100%;
+  position: relative;
+//   background-color: $black-color;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.no-media-container {
+  height: 316px;
+  width: 1136px;
+  position: relative;
+//   background-color: $black-color;
+  text-align: center;
+  border-radius: 4px;
+
+  .no-media-text {
+    // color: $white-color;
+    // font-size: $heading-font-size;
+    margin: 0;
+    // font-weight: $bold-font-weight;
+  }
+}
+
+.single-video,
+.single-image {
+  width: 100%;
+
+  video,
+  img {
+    object-fit: contain;
+    border-radius: 4px;
+    // background-color: $black-color;
+  }
+
+  img {
+    max-height: 316px;
+  }
+}
+
+.video-seeker {
+  height: 5px;
+//   background-color: $light-grey-color;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  margin: 16px 0;
+
+  .event-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transform: translateY(-5px);
+    // background-color: $medium-grey-color;
+    cursor: pointer;
+    z-index: 200;
+
+    &:hover {
+      width: 20px;
+      height: 20px;
+      transform: translate(-2px, -8px);
+    }
+  }
+
+  .seeker {
+    // background-color: $success-color;
+    height: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 8px;
+    transition: width 0.3s linear;
+  }
+}
+
+.timelapse-timeline {
+  position: relative;
+  display: block;
+  margin: 16px 0;
+}
+
+// .seperator,
+// .incident-time,
+// .incident-driver {
+//   color: $text-light-color;
+//   font-size: $body-font-size;
+//   font-weight: $normal-font-weight;
+// }
+
+// .incident-map {
+//   border-radius: 4px;
+//   border: 1px solid $light-grey-color;
+//   background-color: #eee;
+
+//   .no-map {
+//     position: absolute;
+//     left: 50%;
+//     top: 50%;
+//     transform: translate(-50%, -50%);
+//     font-size: $heading-font-size;
+//     text-transform: uppercase;
+//     color: $text-light-color;
+//     font-weight: $bold-font-weight;
+//     margin: 0;
+//   }
+// }
+
+.map-area,
+.incident-map {
+  width: 100%;
+  height: 240px;
+  position: relative;
+}
+
+.incident-map ::ng-deep {
+  position: relative;
+
+  .leaflet-map {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+// .btn-icon {
+//   border: 1px solid $light-grey-color;
+// }
+
+.tab-group {
+  width: 560px;
+
+  ::ng-deep .mat-tab-body-wrapper {
+    height: 100%;
+    max-width: 560px;
+  }
+}
+
+// .comment-panel {
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   width: 100%;
+
+//   .comment-box {
+//     height: 48px;
+//     padding: 0px 16px;
+//     background-color: #eee;
+//     border-radius: 1.5rem;
+//     border: none;
+//     outline: none;
+//     font-size: $body-font-size;
+//   }
+
+//   .send-button {
+//     width: 48px;
+//     height: 48px;
+//     border: 1px solid $light-grey-color;
+//   }
+// }
+
+.tag-option {
+  margin-bottom: 16px;
+}
+
+// .comment-area {
+//   width: 100%;
+//   max-width: 558px;
+//   height: 136px;
+//   overflow-x: hidden;
+//   overflow-y: auto;
+//   padding: 24px 0;
+
+//   .comment-icon {
+//     width: 48px;
+//     height: 48px;
+//     color: $text-dark-color;
+//     text-align: center;
+//     border-radius: 50%;
+//     border: 1px solid $light-grey-color;
+//     font-weight: $medium-font-weight;
+
+//     &.fm-icon {
+//       background-color: $primary-shade1-color;
+//     }
+
+//     &.driver-icon {
+//       background-color: $secondary-shade1-color;
+//     }
+//   }
+
+//   .comment-text {
+//     color: $text-light-color;
+//     font-size: $body-font-size;
+//     max-width: 480px;
+//   }
+
+//   .comment-time {
+//     color: $text-light-color;
+//     font-size: $caption-font-size;
+//   }
+// }
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.video-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: translate(-50%, -50%);
+}
+
+.custom-select {
+  margin-top: 24px;
+  margin-bottom: 48px;
+
+  ::ng-deep .mat-select-panel {
+    max-height: 160px;
+  }
+}
+
+// .timeline-info {
+//   margin: 16px 0;
+//   font-size: $body-font-size !important;
+// }
+
+// .info-icon {
+//   margin-left: 4px;
+//   margin-right: 4px;
+//   vertical-align: middle;
+//   line-height: 20px;
+//   font-size: 20px;
+//   width: 20px;
+//   height: 20px;
+// }
+
+// .btn-coaching {
+//   margin-top: 48px;
+//   background-color: $success-color;
+// }
+
+// .notification-comment {
+//   background-color: $white-color !important;
+//   padding: 12px !important;
+//   margin: 0 !important;
+//   border: 1px solid $light-grey-color;
+// }
+
+// .custom-chip {
+//   background-color: $white-color;
+//   color: $text-dark-color;
+//   pointer-events: none;
+//   font-weight: $medium-font-weight;
+//   border: 1px solid $light-grey-color;
+//   padding: 4px 16px;
+//   font-size: $body-font-size;
+// }
+
+// .mat-chip.mat-standard-chip::after {
+//   background-color: $white-color !important;
+// }
+
+// .success-icon {
+//   color: $success-color;
+// }
+
+// tablet
+@media (min-width: 768px) and (max-width: 1360px) {
+  .comment-area {
+    height: 240px;
+    padding: 24px 0 64px;
+  }
+
+  video {
+    max-height: 360px !important;
+    max-width: 640px !important;
+  }
+
+  .tab-group {
+    width: 100%;
+  }
+
+  .no-media-container {
+    width: 360px !important;
+  }
+}
+
+// mobile
+@media (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  video {
+    height: 240px !important;
+    width: 100% !important;
+  }
+
+  .no-media-container {
+    width: 240px !important;
+  }
+}

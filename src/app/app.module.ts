@@ -6,9 +6,10 @@ import { ViolationListComponent } from './components/violation-list/violation-li
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { RouterModule } from '@angular/router';
+import { IncidentModalComponent } from './components/incident-modal/incident-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, ViolationListComponent],
+  declarations: [AppComponent, ViolationListComponent, IncidentModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

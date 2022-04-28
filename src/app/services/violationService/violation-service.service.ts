@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/app/constants/api.constants';
@@ -33,10 +33,13 @@ export class ViolationServiceService {
     params: any,
     requestType?: string,
     isRefresh?: boolean,
-    currentAsset?: string
+    currentAsset?: string,
+    authToken?: any
   ): Observable<any> {
+    var headers_object = new HttpHeaders().set("x-access-token", authToken);
     const httpOptions = {
       params: setParams(params),
+      headers: headers_object
     };
     let api = requestType === 'DVR' ? API.GET_DVR_REQUESTS : API.GET_VIOLATIONS;
 

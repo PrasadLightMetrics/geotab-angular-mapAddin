@@ -8,24 +8,24 @@
     }
   }
   
-//   // tablet
-//   @media (min-width: 768px) and (max-width: 1279px) {
-//     .video-list-table,
-//     .mat-paginator {
-//       min-width: 1279px !important;
-//     }
-//   }
+  // tablet
+  @media (min-width: 768px) and (max-width: 1279px) {
+    .video-list-table,
+    .mat-paginator {
+      min-width: 1279px !important;
+    }
+  }
   
-//   // mobile
-//   @media (min-width: 320px) and (max-width: 767px) {
-//     .video-list-table,
-//     .mat-paginator {
-//       min-width: 1279px !important;
-//     }
-//   }
-//   .mat-icon-button {
-//     line-height: 1 !important;
-//   }
+  // mobile
+  @media (min-width: 320px) and (max-width: 767px) {
+    .video-list-table,
+    .mat-paginator {
+      min-width: 1279px !important;
+    }
+  }
+  .mat-icon-button {
+    line-height: 1 !important;
+  }
 
 .btn-acc {
     float: right;
